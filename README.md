@@ -1,5 +1,7 @@
 # fpm-doctor
 
+[![Release](https://img.shields.io/github/v/release/North-web-dev/fpm-doctor?sort=semver)](https://github.com/North-web-dev/fpm-doctor/releases) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) ![PHP](https://img.shields.io/badge/php-8.1%2B-777BB4)
+
 **Diagnose and tune PHP-FPM pools from real, measured data.** `fpm-doctor` reads
 your pool configs, measures actual child process RSS (from Linux `/proc` or the
 FPM status page), and turns the usual `pm.max_children` guesswork into honest,
