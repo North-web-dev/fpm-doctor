@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use FpmDoctor\Application;
+
+(static function (array $argv): void {
+    $autoloaders = [
+        __DIR__ . '/../vendor/autoload.php',
+        __DIR__ . '/../../../autoload.php',
+    ];
+    $loaded = false;
+    foreach ($autoloaders as $file) {
+        if (is_file($file)) {
+            require $file;
+            $loaded = true;
+            break;
+        }
+    }
+    if (!$loaded && !class_exists(Application::class)) {
+        fwrite(STDERR, "fpm-doctor: autoloader not found. Run `composer install`.\n");
+        exit(1);
+    }
+
+    exit((new Application())->run($argv));
+})($argv);

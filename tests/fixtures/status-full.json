@@ -1,0 +1,63 @@
+{
+  "pool": "www",
+  "process manager": "dynamic",
+  "start time": 1761500000,
+  "start since": 7200,
+  "accepted conn": 184233,
+  "listen queue": 34,
+  "max listen queue": 128,
+  "listen queue len": 128,
+  "idle processes": 0,
+  "active processes": 120,
+  "total processes": 120,
+  "max active processes": 120,
+  "max children reached": 7,
+  "slow requests": 12,
+  "processes": [
+    {
+      "pid": 2101,
+      "state": "Running",
+      "start time": 1761500010,
+      "start since": 7190,
+      "requests": 1523,
+      "request duration": 452112,
+      "request method": "POST",
+      "request uri": "/checkout",
+      "content length": 812,
+      "user": "-",
+      "script": "/var/www/shop/public/index.php",
+      "last request cpu": 0.0,
+      "last request memory": 73400320
+    },
+    {
+      "pid": 2102,
+      "state": "Running",
+      "start time": 1761500011,
+      "start since": 7189,
+      "requests": 1499,
+      "request duration": 388221,
+      "request method": "GET",
+      "request uri": "/catalog",
+      "content length": 0,
+      "user": "-",
+      "script": "/var/www/shop/public/index.php",
+      "last request cpu": 0.0,
+      "last request memory": 65011712
+    },
+    {
+      "pid": 2103,
+      "state": "Idle",
+      "start time": 1761500012,
+      "start since": 7188,
+      "requests": 1601,
+      "request duration": 10221,
+      "request method": "GET",
+      "request uri": "/health",
+      "content length": 0,
+      "user": "-",
+      "script": "/var/www/shop/public/index.php",
+      "last request cpu": 0.0,
+      "last request memory": 58720256
+    }
+  ]
+}
