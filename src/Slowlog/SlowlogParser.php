@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FpmDoctor\Slowlog;
 
+use FpmDoctor\Util\Text;
+
 /**
  * Streams a php-fpm slowlog and aggregates stack traces by (script, top frame).
  *
@@ -64,7 +66,7 @@ final class SlowlogParser
             if (preg_match(self::HEADER, $line, $m)) {
                 $flush();
                 $inEntry = true;
-                $curTs = trim($m['ts']);
+                $curTs = Text::safe(trim($m['ts']));
                 continue;
             }
 
@@ -79,14 +81,14 @@ final class SlowlogParser
             }
 
             if (preg_match('/^script_filename\s*=\s*(.+)$/', $line, $m)) {
-                $curScript = trim($m[1]);
+                $curScript = Text::safe(trim($m[1]));
                 continue;
             }
 
             if (preg_match(self::FRAME, $line, $m)) {
-                $frame = $m['fn'] . ' ' . trim($m['loc']);
+                $frame = Text::safe($m['fn'] . ' ' . trim($m['loc']));
                 if ($curTopFrame === null) {
-                    $curTopFrame = $m['fn'] . ' ' . trim($m['loc']);
+                    $curTopFrame = $frame;
                 }
                 if (count($curTrace) < $maxSampleFrames) {
                     $curTrace[] = $frame;

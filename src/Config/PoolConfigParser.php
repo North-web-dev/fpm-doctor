@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FpmDoctor\Config;
 
 use FpmDoctor\Util\Bytes;
+use FpmDoctor\Util\Text;
 
 final class PoolConfigParser
 {
@@ -68,16 +69,16 @@ final class PoolConfigParser
             ?? null;
 
         return new Pool(
-            name: $name,
-            pm: $kv['pm'] ?? null,
+            name: Text::safe($name),
+            pm: isset($kv['pm']) ? Text::safe($kv['pm']) : null,
             maxChildren: $this->intOrNull($kv['pm.max_children'] ?? null),
             startServers: $this->intOrNull($kv['pm.start_servers'] ?? null),
             minSpareServers: $this->intOrNull($kv['pm.min_spare_servers'] ?? null),
             maxSpareServers: $this->intOrNull($kv['pm.max_spare_servers'] ?? null),
             maxRequests: $this->intOrNull($kv['pm.max_requests'] ?? null),
-            listen: $kv['listen'] ?? null,
+            listen: isset($kv['listen']) ? Text::safe($kv['listen']) : null,
             memoryLimitBytes: $memRaw !== null ? Bytes::parseShorthand($memRaw) : null,
-            memoryLimitRaw: $memRaw,
+            memoryLimitRaw: $memRaw !== null ? Text::safe($memRaw) : null,
             sourceFile: $source,
         );
     }

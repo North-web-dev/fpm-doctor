@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FpmDoctor\Status;
 
+use FpmDoctor\Util\Text;
+
 final class StatusParser
 {
     public function parseJson(string $json): FpmStatus
@@ -27,8 +29,8 @@ final class StatusParser
         }
 
         return new FpmStatus(
-            pool: (string) ($d['pool'] ?? 'unknown'),
-            processManager: isset($d['process manager']) ? (string) $d['process manager'] : null,
+            pool: Text::safe((string) ($d['pool'] ?? 'unknown')),
+            processManager: isset($d['process manager']) ? Text::safe((string) $d['process manager']) : null,
             listenQueue: $this->int($d, 'listen queue'),
             maxListenQueue: $this->int($d, 'max listen queue'),
             listenQueueLen: $this->int($d, 'listen queue len'),
